@@ -52,6 +52,7 @@ const  typeDefs = gql`
         comentarios: [Comentario]
         calificaciones: [Calificacion]
         N_calificaciones: Float
+        total_puntos: Float
         
     }
 
@@ -67,6 +68,7 @@ const  typeDefs = gql`
         longitud: Float
         etiquetas: String
         N_calificaciones: Float
+        total_puntos: Float
     }
 
 

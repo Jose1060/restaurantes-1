@@ -16,6 +16,7 @@ const restSchema = new Schema({
     etiquetas:[{type:String,require:false}],
     N_calificaciones:{type:Number,require:false},
     promedio:{type:Number,require:false},
+    total_puntos:{type:Number,require:false},
     comentarios: [
 		{
 			idUsuario: { type: String, required: true },

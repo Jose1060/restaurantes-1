@@ -1,6 +1,7 @@
 
 const restaurantes = require('./models/Restaurantes')
 
+
 const resolvers = {
     Query: {
         hello: () => "Hello world",
@@ -63,6 +64,8 @@ const resolvers = {
 			const { idRest, Calificacion } = args;
             //buscamos el restaruante al cual calificar 
 			const rest = await restaurantes.findById(idRest);
+            
+
             //le sumamos 1 a las calificaciones que tiene el restaurante 
             if (rest.N_calificaciones == 0.0){
                 const updatecal = await restaurantes.findOneAndUpdate(idRest,{
@@ -72,21 +75,28 @@ const resolvers = {
                 const updateprom = await restaurantes.findOneAndUpdate(idRest,{
                     $set: {promedio: Calificacion.calificacion}
                 },{new: true})
-                
+
+                const updatetotalPunto = await restaurantes.findOneAndUpdate(idRest,{
+                    $set: {total_puntos: Calificacion.calificacion}
+                },{new: true})
+
 
             }else{
+
+                const prom = ((rest.total_puntos+ Calificacion.calificacion)/(rest.N_calificaciones+1))
+
                 const updatecal = await restaurantes.findOneAndUpdate(idRest,{
                     $set: {N_calificaciones: rest.N_calificaciones+1}
                 },{new: true})
 
-                const prom = (Calificacion.calificacion + rest.promedio)/(rest.N_calificaciones+1)
-                console.log(Calificacion.calificacion)
-                console.log(rest.promedio)
-                console.log(rest.N_calificaciones+1)
-                console.log(prom)
-                 //const updateprom = await restaurantes.findOneAndUpdate(idRest,{
-                   //  $set: {promedio: prom}
-                // },{new: true})
+                const updateprom = await restaurantes.findOneAndUpdate(idRest,{
+                  $set: {promedio: prom}
+                 },{new: true})
+
+                 const updatetotalPunto = await restaurantes.findOneAndUpdate(idRest,{
+                    $set: {total_puntos: rest.total_puntos+Calificacion.calificacion}
+                },{new: true})
+
             }
             
 			rest.calificaciones.push(Calificacion)
@@ -113,8 +123,9 @@ const resolvers = {
         crearRestaurante: async(_, args) => {
             var N_calificaciones = 0.0
             var promedio = 0.0
+            var total_puntos = 0.0
             const {nombre,direccion,telefono,email,imagen,descripcion,latitud,longitud,etiquetas} = args.Restaurante
-            const newRestaurante = new restaurantes({nombre,direccion,telefono,email,imagen,descripcion,latitud,longitud,etiquetas,N_calificaciones,promedio});
+            const newRestaurante = new restaurantes({nombre,direccion,telefono,email,imagen,descripcion,latitud,longitud,etiquetas,N_calificaciones,promedio,total_puntos});
             await newRestaurante.save()
             return newRestaurante
         },
