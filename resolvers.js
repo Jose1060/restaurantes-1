@@ -10,6 +10,7 @@ const resolvers = {
             return rest
         },
         getRestaurante: async(_, {id}) => {
+            console.log(id)
             return await restaurantes.findById(id);
         },
         getRestauranteEtiqueta: async(_,{etiquetas2}) =>{
@@ -24,6 +25,19 @@ const resolvers = {
 
             
         },
+
+        Variosrestaurantes: async(_,{id}) =>{
+
+            console.log(id)
+            const rest = await restaurantes.find({_id: {$in:id}})
+
+                console.log(rest)
+
+            return rest
+        },
+
+
+
         getRestaurantesCerca: async(_,{latitud1,longitud1,etiquetas2}) =>{
             const rest = await restaurantes.find({}).select('longitud')
             const x1 = latitud1 - 0.004
@@ -46,6 +60,7 @@ const resolvers = {
             
             return rest2
         },
+        
         getComentarios: async (_, args) => {
 			return Restaurante.findById(args.idRest);
 		},

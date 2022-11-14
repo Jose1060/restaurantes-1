@@ -66,7 +66,7 @@ const  typeDefs = gql`
 		descripcion: String
         latitud: Float
         longitud: Float
-        etiquetas: String
+        etiquetas: [String]
         N_calificaciones: Float
         total_puntos: Float
     }
@@ -79,6 +79,8 @@ type Query {
     getRestauranteEtiqueta(etiquetas2: [String]): [Restaurante]
     getRestaurantesCerca(latitud1: Float,longitud1:Float,etiquetas2: [String]):[Restaurante]
     getComentarios(idRest: ID): [Restaurante]
+    
+    Variosrestaurantes(id:[ID]):[Restaurante]
     
 }
 
