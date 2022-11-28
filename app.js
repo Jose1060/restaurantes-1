@@ -8,6 +8,7 @@ const connectDB = require("./db");
 const Restaurntes2 = require('./models/Restaurantes')
 var bodyParser = require('body-parser')
 
+//api
 const app = express()
 connectDB()
 app.get("/", (req, res) => res.send("Welcome to my API :v"));
