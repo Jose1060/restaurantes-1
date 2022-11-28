@@ -14,7 +14,6 @@ app.get("/", (req, res) => res.send("Welcome to my API :v"));
 
 app.get("/descargar",function(req,res){
     res.download(__dirname+'/app-movil/'+'app-release.apk')
-    res.send("Descarga")
 });
 
 app.get("/GetAllrestaurants",async (req,res)=>{
