@@ -14,6 +14,7 @@ app.get("/", (req, res) => res.send("Welcome to my API :v"));
 
 app.get("/descargar",function(req,res){
     res.download(__dirname+'/app-movil/'+'app-release.apk')
+    res.send("Descarga")
 });
 
 app.get("/GetAllrestaurants",async (req,res)=>{
@@ -100,7 +101,7 @@ async function start(){
     app.listen(process.env.PORT,()=>{
         console.log('server on port',process.env.PORT)
     })
-    
+
 
 }
 
