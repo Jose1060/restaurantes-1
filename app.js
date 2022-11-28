@@ -24,7 +24,7 @@ app.get("/GetAllrestaurants",async (req,res)=>{
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.get("/restaurantescerca",async (req,res)=>{
+app.post("/restaurantescerca",async (req,res)=>{
     let longitud = req.body.longitud;
     let latitud = req.body.latitud;
     let etiquetas2 = req.body.etiquetas;
@@ -72,6 +72,13 @@ app.get("/VariosRestaurantes",async (req,res)=>{
     const rest = await Restaurntes2.find({_id: {$in:listaRestaurantesid}})
     res.json(rest);
 });
+
+
+
+
+
+
+
 
 
 
