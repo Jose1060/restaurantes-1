@@ -26,6 +26,17 @@ const restSchema = new Schema({
 		},
 	],
 
+
+  carta: [
+		{
+			nombre: { type: String, required: true },
+			detalle: { type: String, required: true },
+			imagen: { type: String, required: true },
+      precio: { type: Number, required: true },
+      ranking: { type: Number, required: true },
+    },
+	],
+
     calificaciones: [
 		{
 			idUsuario: { type: String, required: true},

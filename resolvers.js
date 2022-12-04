@@ -1,5 +1,6 @@
 
 const restaurantes = require('./models/Restaurantes')
+const Cartas = require('./models/carta')
 
 
 const resolvers = {
@@ -125,13 +126,28 @@ const resolvers = {
 			const { idRest, etiqueta } = args;
 			const rest = await restaurantes.findById(idRest);
 			await rest.save();
-            
+            console.log(etiqueta)
             for(etiqueta3 in etiqueta){
                 const rest = await restaurantes.findById(idRest);
 			    rest.etiquetas.push(etiqueta[etiqueta3]);
 			    await rest.save();
             }
             
+			return rest;
+		},
+
+
+        crearCarta: async (_, args) => {
+			const { idRest, carta } = args;
+			const rest = await restaurantes.findById(idRest);
+
+            const obj = JSON.parse(JSON.stringify(carta)); // req.body = [Object: null prototype] { title: 'product' }
+            console.log(obj);
+
+            rest.carta.push(obj);
+
+            await rest.save();
+           
 			return rest;
 		},
 

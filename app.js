@@ -75,16 +75,23 @@ app.get("/VariosRestaurantes",async (req,res)=>{
 });
 
 
+app.post("/RestauranteEtiqueta",async(req,res)=>{
+    let etiqueta = req.body.etiqueta;
+    
+    const rest = await Restaurntes2.find({etiquetas: {$in:etiqueta}})
+    res.json(rest);
+})
 
 
+app.get("/getRestaurante/:_id",async(req,res)=>{
 
+    let id = req.params._id;
+    console.log(id)
+    const restaurante = await Restaurntes2.findById(id);
 
+    res.json(restaurante)
 
-
-
-
-
-
+})
 
 module.exports = app
 

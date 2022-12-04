@@ -16,6 +16,23 @@ const  typeDefs = gql`
 	}
 
 
+    type Carta {
+	  nombre: String
+	  detalle:String
+	  imagen:String
+      precio:Float
+      ranking:Float
+	}
+
+    input CartaInput {
+		nombre: String
+	    detalle:String
+	    imagen:String
+        precio:Float
+        ranking:Float
+	}
+
+
 
     type Calificacion {
 		idUsuario: ID
@@ -50,7 +67,8 @@ const  typeDefs = gql`
         longitud: Float
         etiquetas: [String]
         comentarios: [Comentario]
-        calificaciones: [Calificacion]
+        calificaciones: [Carta]
+        carta: [Carta]
         N_calificaciones: Float
         total_puntos: Float
         
@@ -91,6 +109,8 @@ type Mutation{
     createEtiqueta(idRest: ID!, etiqueta: [String]): Restaurante
     createComentario(idRest: ID!, Comentario: ComentarioInput!): Restaurante
     createCalificacion(idRest:ID!,Calificacion:CalificacionInput!):Restaurante
+    crearCarta(idRest:ID!,carta:CartaInput):Restaurante
+
     
 }
 `
